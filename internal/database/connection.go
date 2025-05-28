@@ -8,7 +8,10 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
-var DB *sql.DB
+var (
+	DB          *sql.DB
+	ContactRepo *ContactRepository
+)
 
 func InitDB() error {
 	dbPath := os.Getenv("DB_PATH")
@@ -27,7 +30,13 @@ func InitDB() error {
 	}
 
 	log.Println("Database connected successfully")
-	return createTables()
+	if err := createTables(); err != nil {
+		return err
+	}
+
+	ContactRepo = NewContactRepository(DB)
+
+	return nil
 }
 
 func createTables() error {

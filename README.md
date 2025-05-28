@@ -18,6 +18,20 @@ FluxKart.com needs to identify and track customer identity across multiple purch
 - `GET /health` - Health check endpoint
 - `POST /identify` - Identity reconciliation endpoint (coming soon)
 
+## Database Schema
+
+The service uses SQLite database with a `contacts` table for storing customer contact information.
+
+### Contact Table Schema
+- `id` - Primary key (auto-increment)
+- `phone_number` - Phone number (optional)
+- `email` - Email address (optional)
+- `linked_id` - Foreign key to another contact (for linking)
+- `link_precedence` - Either 'primary' or 'secondary'
+- `created_at` - Timestamp when record was created
+- `updated_at` - Timestamp when record was last updated
+- `deleted_at` - Soft delete timestamp (NULL if not deleted)
+
 ## Technology Stack
 
 - **Backend**: Go 1.21

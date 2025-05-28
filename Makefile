@@ -2,40 +2,40 @@
 
 # Build the application
 build:
-    go build -o bin/server cmd/server/main.go
+	go build -o bin/server cmd/server/main.go
 
 # Run the application
 run:
-    go run cmd/server/main.go
+	go run cmd/server/main.go
 
 # Run tests
 test:
-    go test ./...
+	go test ./...
 
 # Run tests with coverage
 test-coverage:
-    go test -cover ./...
+	go test -cover ./...
 
 # Clean build artifacts
 clean:
-    rm -rf bin/
-    rm -f *.db
+	rm -rf bin/
+	rm -f *.db
 
 # Run API tests (requires server to be running)
 test-api:
-    ./test_api.sh
+	./test_api.sh
 
 # Install dependencies
 deps:
-    go mod tidy
+	go mod tidy
 
 # Format code
 fmt:
-    go fmt ./...
+	go fmt ./...
 
 # Run static analysis
 vet:
-    go vet ./...
+	go vet ./...
 
 # Docker commands
 docker-build:
@@ -56,18 +56,18 @@ deploy:
 
 # Help
 help:
-    @echo "Available commands:"
-    @echo "  build         Build the application"
-    @echo "  run           Run the application"
-    @echo "  test          Run unit tests"
-    @echo "  test-coverage Run tests with coverage"
-    @echo "  test-api      Run API integration tests"
-    @echo "  clean         Clean build artifacts"
-    @echo "  deps          Install dependencies"
-    @echo "  fmt           Format code"
-    @echo "  vet           Run static analysis"
-    @echo "  docker-build  Build Docker image"
-    @echo "  docker-run    Run with Docker Compose"
-    @echo "  docker-test   Test Docker container"
-    @echo "  deploy        Deploy application"
-    @echo "  help          Show this help message"
+	@echo "Available commands:"
+	@echo "  build         Build the application"
+	@echo "  run           Run the application"
+	@echo "  test          Run unit tests"
+	@echo "  test-coverage Run tests with coverage"
+	@echo "  test-api      Run API integration tests"
+	@echo "  clean         Clean build artifacts"
+	@echo "  deps          Install dependencies"
+	@echo "  fmt           Format code"
+	@echo "  vet           Run static analysis"
+	@echo "  docker-build  Build Docker image"
+	@echo "  docker-run    Run with Docker Compose"
+	@echo "  docker-test   Test Docker container"
+	@echo "  deploy        Deploy application"
+	@echo "  help          Show this help message"

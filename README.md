@@ -8,11 +8,11 @@ FluxKart.com needs to identify and track customer identity across multiple purch
 
 ## 🚀 Live Demo
 
-**Hosted API Endpoint:** `https://your-app-name.onrender.com`
+**Hosted API Endpoint:** `https://bitespeed-identity-service-0yka.onrender.com/`
 
 Try it out:
 ```bash
-curl -X POST https://your-app-name.onrender.com/identify \
+curl -X POST https://bitespeed-identity-service-0yka.onrender.com/ \
   -H "Content-Type: application/json" \
   -d '{"email": "test@example.com", "phoneNumber": "1234567890"}'
 ```
@@ -167,8 +167,6 @@ The fastest way to deploy this service to production:
 3. **Access your deployed service**:
    - URL: `https://bitespeed-identity-service.onrender.com`
    - Health: `https://bitespeed-identity-service.onrender.com/health`
-
-📖 **Full deployment guide**: See [DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md)
 
 ### 🐳 Docker
 

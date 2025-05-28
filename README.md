@@ -15,8 +15,47 @@ FluxKart.com needs to identify and track customer identity across multiple purch
 
 ## API Endpoints
 
-- `GET /health` - Health check endpoint
-- `POST /identify` - Identity reconciliation endpoint (coming soon)
+### Health Check
+```
+GET /health
+```
+Returns `200 OK` if the service is running.
+
+### Identity Reconciliation
+```
+POST /identify
+Content-Type: application/json
+```
+
+**Request Body:**
+```json
+{
+  "email": "string (optional)",
+  "phoneNumber": "string (optional)"
+}
+```
+
+**Response:**
+```json
+{
+  "contact": {
+    "primaryContatctId": 1,
+    "emails": ["lorraine@hillvalley.edu", "mcfly@hillvalley.edu"],
+    "phoneNumbers": ["123456"],
+    "secondaryContactIds": [23]
+  }
+}
+```
+
+**Example Usage:**
+```bash
+curl -X POST http://localhost:8080/identify \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "lorraine@hillvalley.edu",
+    "phoneNumber": "123456"
+  }'
+```
 
 ## Database Schema
 

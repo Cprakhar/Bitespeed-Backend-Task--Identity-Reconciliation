@@ -2,6 +2,7 @@ package main
 
 import (
 	"bitespeed-identity-reconciliation/internal/database"
+	"bitespeed-identity-reconciliation/internal/handlers"
 	"log"
 	"net/http"
 	"os"
@@ -22,10 +23,14 @@ func main() {
 	}
 	defer database.CloseDB()
 
+	identifyHandler := handlers.NewIdentifyHandler()
+
 	http.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusOK)
 		w.Write([]byte("OK"))
 	})
+
+	http.HandleFunc("/identity", identifyHandler.Identify)
 
 	port := os.Getenv("PORT")
 	if port == "" {
@@ -33,6 +38,9 @@ func main() {
 	}
 	
 	log.Printf("Server is running on port %s", port)
+	log.Println("Available endpoints:")
+    log.Println("  GET  /health   - Health check")
+    log.Println("  POST /identify - Identity reconciliation")
 	if err := http.ListenAndServe(":" + port, nil); err != nil {
 		log.Fatal("Failed to start server:", err)
 	}

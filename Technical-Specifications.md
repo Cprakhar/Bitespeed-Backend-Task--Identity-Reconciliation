@@ -258,8 +258,8 @@ Yes. Let’s take an example
 }
 ```
 ### What stack to use?
-**Database:** Any SQL database can be used
-**Backend framework:** NodeJs with typescript is preferred but any other framework can also be used. Use Golang. - my preferred language.
+**Database:** Use SQLite for this task.
+**Backend framework:** Use Golang - my preferred language.
 
 ## How to submit this task?
 

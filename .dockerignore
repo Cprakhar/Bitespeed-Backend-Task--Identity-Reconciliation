@@ -1,0 +1,14 @@
+.git
+.gitignore
+README.md
+Dockerfile
+docker-compose.yml
+render.yaml
+*.db
+.env
+test_api.sh
+bin/
+*.test
+*.out
+.vscode/
+.idea/

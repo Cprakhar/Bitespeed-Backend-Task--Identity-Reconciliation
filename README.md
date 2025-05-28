@@ -6,12 +6,35 @@ A Go backend service for identifying and linking customer contacts across multip
 
 FluxKart.com needs to identify and track customer identity across multiple purchases, even when customers use different email addresses and phone numbers for each order.
 
+## 🚀 Live Demo
+
+**Hosted API Endpoint:** `https://your-app-name.onrender.com`
+
+Try it out:
+```bash
+curl -X POST https://your-app-name.onrender.com/identify \
+  -H "Content-Type: application/json" \
+  -d '{"email": "test@example.com", "phoneNumber": "1234567890"}'
+```
+
 ## Setup
 
 1. Clone the repository
 2. Copy `.env.example` to `.env` and configure your settings
-3. Run `go mod tidy` to install dependencies
-4. Start the server with `go run cmd/server/main.go`
+3. Run `make deps` to install dependencies
+4. Start the server with `make run`
+
+### Docker Development
+1. Build and run with Docker Compose:
+   ```bash
+   make docker-run
+   ```
+
+### Deployment
+1. For automatic deployment to Render.com:
+   ```bash
+   make deploy
+   ```
 
 ## Testing
 
@@ -29,15 +52,9 @@ make run
 make test-api
 ```
 
-### Manual Testing
+### Docker Testing
 ```bash
-# Health check
-curl http://localhost:8080/health
-
-# Create contact
-curl -X POST http://localhost:8080/identify \
-  -H "Content-Type: application/json" \
-  -d '{"email": "test@example.com", "phoneNumber": "1234567890"}'
+make docker-test
 ```
 
 ## API Endpoints
@@ -74,16 +91,6 @@ Content-Type: application/json
 }
 ```
 
-**Example Usage:**
-```bash
-curl -X POST http://localhost:8080/identify \
-  -H "Content-Type: application/json" \
-  -d '{
-    "email": "lorraine@hillvalley.edu",
-    "phoneNumber": "123456"
-  }'
-```
-
 ## Database Schema
 
 The service uses SQLite database with a `contacts` table for storing customer contact information.
@@ -100,9 +107,10 @@ The service uses SQLite database with a `contacts` table for storing customer co
 
 ## Technology Stack
 
-- **Backend**: Go 1.21
+- **Backend**: Go 1.24
 - **Database**: SQLite
 - **HTTP Framework**: Standard net/http
+- **Deployment**: Docker, Render.com
 
 ## Development Commands
 
@@ -110,5 +118,34 @@ The service uses SQLite database with a `contacts` table for storing customer co
 - `make run` - Run the application
 - `make test` - Run unit tests
 - `make test-api` - Run API tests
-- `make clean` - Clean build artifacts
+- `make docker-build` - Build Docker image
+- `make docker-run` - Run with Docker Compose
+- `make deploy` - Deploy to production
 - `make help` - Show all available commands
+
+## Project Structure
+
+```
+bitespeed-identity-reconciliation/
+├── cmd/server/          # Application entry point
+├── internal/
+│   ├── database/        # Database connection and repository
+│   ├── handlers/        # HTTP handlers
+│   ├── models/          # Data models
+│   └── services/        # Business logic
+├── pkg/utils/           # Utility functions
+├── Dockerfile           # Docker configuration
+├── docker-compose.yml   # Docker Compose configuration
+├── render.yaml          # Render.com deployment config
+└── Makefile            # Build and deployment commands
+```
+
+## Deployment
+
+This application is configured for easy deployment to various platforms:
+
+- **Render.com**: Uses `render.yaml` for automatic deployment
+- **Docker**: Containerized for any Docker-compatible platform
+- **Local**: Simple Go binary deployment
+
+The application automatically creates the SQLite database and required tables on startup.

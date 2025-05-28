@@ -1,0 +1,12 @@
+services:
+  - type: web
+    runtime: go
+    name: bitespeed-identity-service
+    dockerfilePath: ./Dockerfile
+    plan: free
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: DB_PATH
+        value: /tmp/contacts.db
+    healthCheckPath: /health

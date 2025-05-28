@@ -30,18 +30,18 @@ func main() {
 		w.Write([]byte("OK"))
 	})
 
-	http.HandleFunc("/identity", identifyHandler.Identify)
+	http.HandleFunc("/identify", identifyHandler.Identify)
 
 	port := os.Getenv("PORT")
 	if port == "" {
-		port = ":8080"
+		port = "8080"
 	}
-	
+
 	log.Printf("Server is running on port %s", port)
 	log.Println("Available endpoints:")
-    log.Println("  GET  /health   - Health check")
-    log.Println("  POST /identify - Identity reconciliation")
-	if err := http.ListenAndServe(":" + port, nil); err != nil {
+	log.Println("  GET  /health   - Health check")
+	log.Println("  POST /identify - Identity reconciliation")
+	if err := http.ListenAndServe(":"+port, nil); err != nil {
 		log.Fatal("Failed to start server:", err)
 	}
 }

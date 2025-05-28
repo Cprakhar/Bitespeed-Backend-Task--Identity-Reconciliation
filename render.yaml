@@ -1,12 +1,20 @@
 services:
   - type: web
-    runtime: go
+    runtime: docker
+    repo: https://github.com/Cprakhar/Bitespeed-Backend-Task--Identity-Reconciliation
     name: bitespeed-identity-service
     dockerfilePath: ./Dockerfile
     plan: free
+    region: singapore
+    branch: master
+    autoDeploy: true
     envVars:
       - key: PORT
         value: 10000
       - key: DB_PATH
         value: /tmp/contacts.db
+      - key: ENV
+        value: production
     healthCheckPath: /health
+    buildCommand: ""
+    startCommand: ""

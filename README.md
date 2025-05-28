@@ -144,8 +144,69 @@ bitespeed-identity-reconciliation/
 
 This application is configured for easy deployment to various platforms:
 
-- **Render.com**: Uses `render.yaml` for automatic deployment
-- **Docker**: Containerized for any Docker-compatible platform
-- **Local**: Simple Go binary deployment
+### 🚀 Render.com (Recommended)
+
+The fastest way to deploy this service to production:
+
+1. **Quick Deploy**: 
+   - Update the `repo` URL in `render.yaml` with your GitHub repository
+   - Push to GitHub and connect via Render Dashboard
+   - Deploy automatically using the included `render.yaml` configuration
+
+2. **Manual Setup**:
+   ```bash
+   # Update render.yaml with your GitHub repo URL
+   # Push to GitHub
+   git add .
+   git commit -m "Deploy to Render"
+   git push origin main
+   
+   # Go to render.com and create a new Blueprint service
+   ```
+
+3. **Access your deployed service**:
+   - URL: `https://bitespeed-identity-service.onrender.com`
+   - Health: `https://bitespeed-identity-service.onrender.com/health`
+
+📖 **Full deployment guide**: See [DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md)
+
+### 🐳 Docker
+
+Deploy anywhere that supports Docker:
+
+```bash
+# Build and deploy locally
+make docker-build
+make docker-run
+
+# Or use Docker directly
+docker build -t bitespeed-identity-service .
+docker run -p 8080:8080 bitespeed-identity-service
+```
+
+### 💻 Local Binary
+
+For simple server deployment:
+
+```bash
+# Build binary
+make build
+
+# Deploy binary to server
+scp bin/server user@server:/opt/bitespeed/
+ssh user@server "/opt/bitespeed/server"
+```
+
+### ☁️ Other Platforms
+
+The application works on any platform supporting:
+- Docker containers (AWS ECS, Google Cloud Run, Azure Container Instances)
+- Go binaries (any Linux/Windows/macOS server)
+- Kubernetes (use the provided Dockerfile)
+
+**Environment Variables for Production**:
+- `PORT`: Server port (default: 8080, Render uses: 10000)
+- `DB_PATH`: Database file path (default: ./contacts.db)
+- `ENV`: Environment mode (production/development)
 
 The application automatically creates the SQLite database and required tables on startup.

@@ -42,6 +42,7 @@ EXPOSE 8080
 # Set environment variables
 ENV DB_PATH=/tmp/contacts.db
 ENV PORT=8080
+ENV GIN_MODE=release
 
 # Run the application
 CMD ["./main"]
